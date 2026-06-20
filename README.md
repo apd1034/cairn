@@ -28,6 +28,7 @@ Cairn keeps the useful part — one concept per file — and hardens it for prod
 - **Reference parsers:** [tools/reference-parser/](tools/reference-parser/)
 - **Validator, indexer, and auditor:** [tools/](tools/)
 - **Project migration agent:** [tools/project-agent/](tools/project-agent/)
+- **Report-writing agent:** [tools/report-agent/](tools/report-agent/)
 - **Agent Skills package:** [skills/cairn-project-migration/](skills/cairn-project-migration/)
 - **Migration guide:** [migration-guides/project-analysis.md](migration-guides/project-analysis.md)
 - **RFC process:** [RFC/](RFC/)
@@ -92,9 +93,11 @@ cairn/
 │   ├── index/
 │   ├── auditor/
 │   ├── project-agent/
+│   ├── report-agent/
 │   └── reference-parser/
 ├── skills/
-│   └── cairn-project-migration/
+│   ├── cairn-project-migration/
+│   └── cairn-report-writing/
 ├── migration-guides/
 ├── reports/
 └── RFC/
@@ -160,10 +163,18 @@ The agent:
 
 ## Agent Skills Support
 
-This repo includes an Agent Skills-compatible package:
+This repo includes Agent Skills-compatible packages:
 
 ```text
-skills/cairn-project-migration/
+skills/
+├── cairn-project-migration/
+└── cairn-report-writing/
+```
+
+The project migration skill stages concepts and migration reports:
+
+```text
+cairn-project-migration/
 ├── SKILL.md
 ├── scripts/
 ├── references/
@@ -171,15 +182,25 @@ skills/cairn-project-migration/
 └── evals/
 ```
 
-Use it with any Agent Skills-compatible client by installing or copying the `skills/cairn-project-migration/` directory into that client's skills directory.
+The report-writing skill standardizes Cairn migration and audit reports:
 
-The skill follows the Agent Skills progressive disclosure model:
+```text
+cairn-report-writing/
+├── SKILL.md
+├── scripts/
+├── references/
+└── agents/
+```
+
+Use them with any Agent Skills-compatible client by installing or copying the relevant skill directory into that client's skills directory.
+
+Both skills follow the Agent Skills progressive disclosure model:
 
 - `SKILL.md` contains concise trigger and workflow instructions.
-- `references/` contains the detailed migration contract.
-- `scripts/` contains the reusable scanner.
-- `assets/` contains schemas needed for standalone execution.
-- `evals/` contains expected behavior test cases.
+- `references/` contains the detailed contract or standard.
+- `scripts/` contains reusable automation where deterministic output matters.
+- `assets/` contains supporting static files where needed.
+- `evals/` contains expected behavior test cases where useful.
 
 ## Compliance Levels
 

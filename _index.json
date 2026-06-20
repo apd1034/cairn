@@ -41,6 +41,13 @@
         "type": "references"
       }
     ],
+    "../../skills/cairn-report-writing.md": [
+      {
+        "confidence": "declared",
+        "source": "tools/report-agent/AGENT.md",
+        "type": "references"
+      }
+    ],
     "../../tools/project-agent/README.md": [
       {
         "confidence": "declared",
@@ -53,6 +60,11 @@
         "confidence": "declared",
         "source": "schemas/agent-skill.md",
         "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "skills/cairn-report-writing.md",
+        "type": "implements"
       },
       {
         "confidence": "declared",
@@ -88,6 +100,20 @@
       {
         "confidence": "declared",
         "source": "skills/cairn-project-migration.md",
+        "type": "references"
+      }
+    ],
+    "../tools/report-agent/AGENT.md": [
+      {
+        "confidence": "declared",
+        "source": "skills/cairn-report-writing.md",
+        "type": "references"
+      }
+    ],
+    "AGENT.md": [
+      {
+        "confidence": "declared",
+        "source": "tools/report-agent/README.md",
         "type": "references"
       }
     ],
@@ -553,6 +579,32 @@
       "title": "Schema",
       "type": "schemas/concept.md"
     },
+    "skills/cairn-report-writing.md": {
+      "description": "Agent Skills-compatible package for writing Cairn migration and audit reports.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Packages Cairn report writing behavior as an Agent Skill companion.",
+          "target": "../RFC/0002-agent-skills-companion.md",
+          "type": "implements"
+        },
+        {
+          "confidence": "declared",
+          "note": "Mirrors the Cairn report-writing agent operating contract.",
+          "target": "../tools/report-agent/AGENT.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "agent-skills",
+        "reports",
+        "cairn"
+      ],
+      "timestamp": "2026-06-20 10:40:00-05:00",
+      "title": "Cairn Report Writing Skill",
+      "type": "schemas/agent-skill.md"
+    },
     "tools/auditor/README.md": {
       "description": "Reports Cairn compliance levels per concept using the published audit rubric.",
       "relations": [
@@ -658,6 +710,45 @@
       ],
       "timestamp": "2026-06-20 00:00:00-05:00",
       "title": "Reference Parser",
+      "type": "schemas/concept.md"
+    },
+    "tools/report-agent/AGENT.md": {
+      "description": "Operating contract for writing Cairn-compliant migration and audit reports.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "The Agent Skills package exposes this report-writing behavior to compatible agents.",
+          "target": "../../skills/cairn-report-writing.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "agent",
+        "reports",
+        "migration"
+      ],
+      "timestamp": "2026-06-20 10:40:00-05:00",
+      "title": "Cairn Report Writing Agent",
+      "type": "schemas/concept.md"
+    },
+    "tools/report-agent/README.md": {
+      "description": "Documentation for the Cairn report-writing agent and reusable report writer.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "AGENT.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "tools",
+        "reports",
+        "agent"
+      ],
+      "timestamp": "2026-06-20 10:40:00-05:00",
+      "title": "Report Agent Tooling",
       "type": "schemas/concept.md"
     },
     "tools/validate/README.md": {

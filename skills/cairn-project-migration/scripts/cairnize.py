@@ -21,6 +21,10 @@ def slug(text):
     return text or "concept"
 
 
+def yq(value):
+    return json.dumps(str(value))
+
+
 def parent_or_name(rel, name):
     parent = rel.parent.as_posix()
     return name if parent in {"", "."} else parent
@@ -148,14 +152,14 @@ def concept_body(candidate, timestamp):
     rel_yaml = ""
     if relations:
         rel_yaml = "relations:\n" + "\n".join(
-            f"  - type: {r['type']}\n    target: {r['target']}\n    confidence: {r['confidence']}\n    note: {r['note']}"
+            f"  - type: {r['type']}\n    target: {yq(r['target'])}\n    confidence: {r['confidence']}\n    note: {yq(r['note'])}"
             for r in relations
         )
     frontmatter = [
         "---",
         "type: schemas/concept.md",
-        f"title: {candidate['title']}",
-        f"description: {candidate['description']}",
+        f"title: {yq(candidate['title'])}",
+        f"description: {yq(candidate['description'])}",
         "status: draft",
         f"tags: [{', '.join(tags)}]",
         f"timestamp: {timestamp}",
