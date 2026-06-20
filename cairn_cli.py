@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import argparse
+import json
+import sys
+
+from tools.auditor.audit import audit, write_report as write_audit_report
+from tools.index.index import main as write_index
+from tools.project_agent.cairnize import run as run_migration
+from tools.reference_parser.parser import parse as parse_concept
+from tools.validate.validate import validate
+
+
+def cmd_validate(args):
+    results = validate(Path(args.root))
+    print(json.dumps(results, indent=2))
+    return 1 if any(not item["valid"] for item in results) else 0
+
+
+def cmd_index(args):
+    index = write_index(Path(args.root))
+    print(json.dumps({
+        "concepts": len(index.get("concepts", {})),
+        "backlinks": len(index.get("backlinks", {})),
+        "index": str(Path(args.root) / "_index.json"),
+    }, indent=2))
+    return 0
+
+
+def cmd_audit(args):
+    root = Path(args.root)
+    results = audit(root)
+    report = None if args.json_only else write_audit_report(root, results)
+    print(json.dumps({"report": str(report) if report else None, "results": results}, indent=2))
+    return 0
+
+
+def cmd_migrate(args):
+    run_migration(args)
+    return 0
+
+
+def cmd_parse(args):
+    for file in args.files:
+        print(json.dumps(parse_concept(file), indent=2, default=str))
+    return 0
+
+
+def build_parser():
+    parser = argparse.ArgumentParser(prog="cairn", description="Validate, index, audit, and migrate Cairn bundles.")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    validate_cmd = sub.add_parser("validate", help="Validate a Cairn bundle.")
+    validate_cmd.add_argument("root", nargs="?", default=".")
+    validate_cmd.set_defaults(func=cmd_validate)
+
+    index_cmd = sub.add_parser("index", help="Generate _index.json for a Cairn bundle.")
+    index_cmd.add_argument("root", nargs="?", default=".")
+    index_cmd.set_defaults(func=cmd_index)
+
+    audit_cmd = sub.add_parser("audit", help="Run a per-concept Cairn compliance audit.")
+    audit_cmd.add_argument("root", nargs="?", default=".")
+    audit_cmd.add_argument("--json-only", action="store_true", help="Do not write a timestamped audit report.")
+    audit_cmd.set_defaults(func=cmd_audit)
+
+    migrate_cmd = sub.add_parser("migrate", help="Stage a read-only Cairn migration for a project.")
+    migrate_cmd.add_argument("target", help="Project directory to scan")
+    migrate_cmd.add_argument("--output", help="Directory for staged concepts and reports")
+    migrate_cmd.add_argument("--write-into-target", action="store_true", help="Write cairn-proposed/ and reports/ inside the target project")
+    migrate_cmd.set_defaults(func=cmd_migrate)
+
+    parse_cmd = sub.add_parser("parse", help="Parse one or more Cairn concept files.")
+    parse_cmd.add_argument("files", nargs="+")
+    parse_cmd.set_defaults(func=cmd_parse)
+
+    return parser
+
+
+def main(argv=None):
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    return args.func(args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

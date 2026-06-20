@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cairn-format"
+version = "0.1.0"
+description = "Portable file-based knowledge format with validation, indexing, auditing, and migration tooling."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "Cairn contributors"}
+]
+dependencies = [
+  "PyYAML>=6.0"
+]
+keywords = ["knowledge-graph", "markdown", "yaml", "documentation", "agent-skills"]
+
+[project.scripts]
+cairn = "cairn_cli:main"
+
+[tool.setuptools]
+py-modules = ["cairn_cli"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tools*", "schemas*"]
+
+[tool.setuptools.package-data]
+schemas = ["*.md"]

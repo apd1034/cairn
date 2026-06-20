@@ -20,8 +20,8 @@ def split_doc(path):
 
 
 def files(root):
-    ignored = {"node_modules", ".git", "cairn-runs"}
-    return [p for p in root.rglob("*.md") if not ignored & set(p.parts)]
+    ignored = {"node_modules", ".git", "cairn-runs", "fixtures"}
+    return [p for p in root.rglob("*.md") if not ignored & set(p.relative_to(root).parts)]
 
 
 def rel(root, path):
@@ -49,7 +49,7 @@ def validate(root):
     aliases = {}
     for path in files(root):
         meta, body, is_concept = split_doc(path)
-        if not is_concept or not (meta.get("type") and meta.get("title")):
+        if not is_concept or not (meta.get("type") or meta.get("title")):
             continue
         key = rel(root, path)
         docs[key] = (path, meta, body)

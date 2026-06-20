@@ -4,6 +4,8 @@
 
 > Cairn v1.0 — Project-agnostic specification, examples, tools, and agent skill.
 
+[![CI](https://github.com/apd1034/cairn/actions/workflows/ci.yml/badge.svg)](https://github.com/apd1034/cairn/actions/workflows/ci.yml)
+
 Cairn is an open standard for representing project knowledge as a directory of plain Markdown files. Each concept is one file. The file path is the concept's identity. There is no SDK, no runtime, no database, and no required service — only Markdown, YAML frontmatter, and relationships that can be inspected, queried, and verified.
 
 ![Cairn: the logical evolution of OKF](assets/cairn-logical-evolution-of-okf.png)
@@ -27,6 +29,7 @@ Cairn keeps the useful part — one concept per file — and hardens it for prod
 - **Examples:** [examples/](examples/)
 - **Reference parsers:** [tools/reference-parser/](tools/reference-parser/)
 - **Validator, indexer, and auditor:** [tools/](tools/)
+- **Installable CLI:** `cairn validate`, `cairn index`, `cairn audit`, `cairn migrate`
 - **Project migration agent:** [tools/project-agent/](tools/project-agent/)
 - **Report-writing agent:** [tools/report-agent/](tools/report-agent/)
 - **Agent Skills package:** [skills/cairn-project-migration/](skills/cairn-project-migration/)
@@ -105,28 +108,42 @@ cairn/
 
 ## Quick Start
 
+Install locally from this repository:
+
+```sh
+python3 -m pip install -e .
+```
+
 Validate this repository as a Cairn bundle:
 
 ```sh
-python3 tools/validate/validate.py .
+cairn validate .
 ```
 
 Generate a structured index with backlinks:
 
 ```sh
-python3 tools/index/index.py .
+cairn index .
 ```
 
 Run a per-concept compliance audit:
 
 ```sh
-python3 tools/auditor/audit.py .
+cairn audit .
 ```
 
 Parse a concept with the minimal reference parser:
 
 ```sh
-python3 tools/reference-parser/parser.py SPECIFICATION.md
+cairn parse SPECIFICATION.md
+```
+
+The legacy script paths are still available for direct use:
+
+```sh
+python3 tools/validate/validate.py .
+python3 tools/index/index.py .
+python3 tools/auditor/audit.py . --json-only
 ```
 
 ## Bring A Project Up To Cairn Standard
@@ -134,7 +151,7 @@ python3 tools/reference-parser/parser.py SPECIFICATION.md
 Use the project migration agent. It scans a target project read-only by default and stages proposed Cairn concepts outside the source project.
 
 ```sh
-python3 tools/project-agent/cairnize.py /path/to/project
+cairn migrate /path/to/project
 ```
 
 Default output:
@@ -148,7 +165,7 @@ cairn-runs/<project>-<timestamp>/
 To write staging artifacts inside the target project, opt in explicitly:
 
 ```sh
-python3 tools/project-agent/cairnize.py /path/to/project --write-into-target
+cairn migrate /path/to/project --write-into-target
 ```
 
 The agent:
@@ -216,6 +233,22 @@ Compliance is reported per concept only.
 | 6 | + `hash` present and verified against current body content |
 
 There is no whole-bundle compliance score.
+
+## Test And Release Readiness
+
+This repository includes fixture-based regression tests and GitHub Actions CI. The tests cover valid bundles, invalid bundles, index generation, audit JSON output, and read-only project migration staging.
+
+Run the local suite:
+
+```sh
+python3 -m unittest discover -s tests
+python3 -m compileall cairn_cli.py tools skills/cairn-project-migration/scripts skills/cairn-report-writing/scripts
+cairn validate .
+cairn index .
+cairn audit . --json-only
+```
+
+Release candidates should pass CI on Python 3.10, 3.11, and 3.12 before tagging.
 
 ## Frequently Asked Questions
 

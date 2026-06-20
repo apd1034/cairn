@@ -17,8 +17,8 @@ def split_doc(path):
 
 
 def md_files(root):
-    ignored = {"node_modules", ".git", "cairn-runs"}
-    return [p for p in root.rglob("*.md") if not ignored & set(p.parts)]
+    ignored = {"node_modules", ".git", "cairn-runs", "fixtures"}
+    return [p for p in root.rglob("*.md") if not ignored & set(p.relative_to(root).parts)]
 
 
 def resolves(root, current, target, docs, aliases):
