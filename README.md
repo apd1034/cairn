@@ -2,7 +2,7 @@
 
 **A portable knowledge format — durable identity, verifiable relationships, just files.**
 
-> Cairn v1.0 — Project-agnostic specification, examples, tools, and agent skill.
+> Cairn v0.2.0 — Project-agnostic specification, examples, tools, and agent skill.
 
 [![CI](https://github.com/apd1034/cairn/actions/workflows/ci.yml/badge.svg)](https://github.com/apd1034/cairn/actions/workflows/ci.yml)
 
@@ -29,7 +29,9 @@ Cairn keeps the useful part — one concept per file — and hardens it for prod
 - **Examples:** [examples/](examples/)
 - **Reference parsers:** [tools/reference-parser/](tools/reference-parser/)
 - **Validator, indexer, and auditor:** [tools/](tools/)
-- **Installable CLI:** `cairn validate`, `cairn index`, `cairn audit`, `cairn migrate`
+- **Installable CLI:** `cairn validate`, `cairn index`, `cairn audit`, `cairn migrate`, `cairn merge`, `cairn corpus`
+- **Shared test vectors:** [test-vectors/](test-vectors/)
+- **JavaScript reference package:** [js/](js/) and [package.json](package.json)
 - **Project migration agent:** [tools/project-agent/](tools/project-agent/)
 - **Report-writing agent:** [tools/report-agent/](tools/report-agent/)
 - **Agent Skills package:** [skills/cairn-project-migration/](skills/cairn-project-migration/)
@@ -138,6 +140,12 @@ Parse a concept with the minimal reference parser:
 cairn parse SPECIFICATION.md
 ```
 
+Merge three concept versions deterministically:
+
+```sh
+cairn merge base.md ours.md theirs.md --output merged.md --conflicts-json conflicts.json
+```
+
 The legacy script paths are still available for direct use:
 
 ```sh
@@ -242,6 +250,7 @@ Run the local suite:
 
 ```sh
 python3 -m unittest discover -s tests
+npm test
 python3 -m compileall cairn_cli.py tools skills/cairn-project-migration/scripts skills/cairn-report-writing/scripts
 cairn validate .
 cairn index .
@@ -249,6 +258,21 @@ cairn audit . --json-only
 ```
 
 Release candidates should pass CI on Python 3.10, 3.11, and 3.12 before tagging.
+
+## Proof Artifacts
+
+Cairn now keeps claims tied to executable artifacts:
+
+- `tools/merge/merge.py` implements deterministic three-way concept merges.
+- `tests/test_cairn_tools.py` includes fixture, vector, and randomized merge determinism tests.
+- `test-vectors/` defines shared hash, merge, and compliance expectations.
+- `js/cairn.js` is a JavaScript reference parser/hash implementation checked against the same hash vectors.
+- `docs/security/THREAT_MODEL.md` documents YAML, path, and future `cairn://` trust boundaries.
+- `tools/corpus/evaluate.py` provides a repeatable harness for migration-agent corpus runs.
+
+## Version Stability
+
+Cairn uses the same semantic version for the format specification and reference tooling. Versions before `1.0.0` are standard-candidate releases: concept files should remain readable, but frontmatter fields and merge semantics may still change through the RFC process. Breaking format changes require a new minor version before `1.0.0` and a new major version after `1.0.0`.
 
 ## Frequently Asked Questions
 

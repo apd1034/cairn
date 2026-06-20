@@ -1,0 +1,29 @@
+{
+  "name": "@apd1034/cairn",
+  "version": "0.2.0",
+  "description": "JavaScript reference implementation for the Cairn portable knowledge format.",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "js/cairn.js",
+  "bin": {
+    "cairn-js": "npm/bin/cairn-js"
+  },
+  "files": [
+    "js/",
+    "npm/bin/",
+    "test-vectors/",
+    "SPECIFICATION.md",
+    "schemas/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node js/test-vectors.js"
+  },
+  "keywords": [
+    "knowledge-graph",
+    "markdown",
+    "yaml",
+    "cairn"
+  ]
+}

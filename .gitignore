@@ -8,3 +8,4 @@ dist/
 build/
 *.egg-info/
 cairn-runs/
+corpus-runs/

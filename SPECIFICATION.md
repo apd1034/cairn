@@ -1,6 +1,6 @@
 ---
 type: schemas/specification.md
-title: Cairn v1.0 Specification
+title: Cairn v0.2.0 Specification
 description: Defines the core Cairn format for portable, file-based knowledge concepts.
 status: active
 tags: [cairn, specification, core]
@@ -12,7 +12,7 @@ relations:
     note: Establishes the initial Cairn core specification.
 ---
 
-# Cairn v1.0 Specification
+# Cairn v0.2.0 Specification
 
 ## 1. The Cairn Concept
 

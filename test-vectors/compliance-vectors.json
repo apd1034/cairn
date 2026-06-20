@@ -1,0 +1,16 @@
+[
+  {
+    "name": "valid fixture service",
+    "bundle": "tests/fixtures/valid-bundle",
+    "path": "service.md",
+    "valid": true,
+    "minimum_level": 5
+  },
+  {
+    "name": "invalid fixture missing title",
+    "bundle": "tests/fixtures/invalid-bundle",
+    "path": "missing-title.md",
+    "valid": false,
+    "expected_error": "missing title"
+  }
+]

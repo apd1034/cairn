@@ -1,5 +1,12 @@
 {
   "backlinks": {
+    "../../RFC/0005-uri-security-model.md": [
+      {
+        "confidence": "declared",
+        "source": "docs/security/THREAT_MODEL.md",
+        "type": "implements"
+      }
+    ],
     "../../SPECIFICATION.md": [
       {
         "confidence": "declared",
@@ -80,6 +87,11 @@
       },
       {
         "confidence": "declared",
+        "source": "RFC/0003-version-stability.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
         "source": "assets/knowledge-formats-okf-vs-cairn.md",
         "type": "references"
       },
@@ -89,11 +101,25 @@
         "type": "references"
       }
     ],
+    "../docs/security/THREAT_MODEL.md": [
+      {
+        "confidence": "declared",
+        "source": "RFC/0005-uri-security-model.md",
+        "type": "references"
+      }
+    ],
     "../schemas/agent-skill.md": [
       {
         "confidence": "declared",
         "source": "skills/README.md",
         "type": "references"
+      }
+    ],
+    "../tools/merge/merge.py": [
+      {
+        "confidence": "declared",
+        "source": "RFC/0004-merge-engine.md",
+        "type": "implements"
       }
     ],
     "../tools/project-agent/AGENT.md": [
@@ -182,14 +208,14 @@
   },
   "concepts": {
     "RFC/0001-cairn-core.md": {
-      "description": "Establishes the initial Cairn core format and repository layout.",
+      "description": "Establishes the initial Cairn core format and repository layout as a standard-candidate release.",
       "status": "active",
       "tags": [
         "rfc",
         "core"
       ],
       "timestamp": "2026-06-20 00:00:00-05:00",
-      "title": "Cairn Core v1.0",
+      "title": "Cairn Core v0.1.0",
       "type": "schemas/rfc.md"
     },
     "RFC/0002-agent-skills-companion.md": {
@@ -212,6 +238,66 @@
       "title": "Agent Skills Companion Layer",
       "type": "schemas/rfc.md"
     },
+    "RFC/0003-version-stability.md": {
+      "description": "Aligns Cairn format and tooling versions and defines pre-1.0 compatibility guarantees.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Establishes the versioning policy for the published specification.",
+          "target": "../SPECIFICATION.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "rfc",
+        "versioning",
+        "governance"
+      ],
+      "timestamp": "2026-06-20 16:40:00+00:00",
+      "title": "Version Stability Policy",
+      "type": "schemas/rfc.md"
+    },
+    "RFC/0004-merge-engine.md": {
+      "description": "Requires deterministic merge semantics to be backed by an executable reference engine and property tests.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "The Python merge engine is the current executable reference for Cairn merge behavior.",
+          "target": "../tools/merge/merge.py",
+          "type": "implements"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "rfc",
+        "merge",
+        "testing"
+      ],
+      "timestamp": "2026-06-20 16:41:00+00:00",
+      "title": "Executable Merge Semantics",
+      "type": "schemas/rfc.md"
+    },
+    "RFC/0005-uri-security-model.md": {
+      "description": "Defines trust boundaries for local paths, aliases, and future cairn:// remote resolution.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "The threat model gives implementation guidance for this RFC.",
+          "target": "../docs/security/THREAT_MODEL.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "rfc",
+        "security",
+        "uri-resolution"
+      ],
+      "timestamp": "2026-06-20 16:42:00+00:00",
+      "title": "URI Resolution Security Model",
+      "type": "schemas/rfc.md"
+    },
     "SPECIFICATION.md": {
       "description": "Defines the core Cairn format for portable, file-based knowledge concepts.",
       "relations": [
@@ -229,7 +315,7 @@
         "core"
       ],
       "timestamp": "2026-06-20 00:00:00-05:00",
-      "title": "Cairn v1.0 Specification",
+      "title": "Cairn v0.2.0 Specification",
       "type": "schemas/specification.md"
     },
     "assets/cairn-logical-evolution-of-okf.md": {
@@ -272,6 +358,38 @@
       ],
       "timestamp": "2026-06-20 09:40:00-05:00",
       "title": "Knowledge Formats OKF vs Cairn Infographic",
+      "type": "schemas/concept.md"
+    },
+    "docs/corpus/EVALUATION.md": {
+      "description": "Defines how Cairn migration-agent precision and recall should be measured on real projects.",
+      "status": "active",
+      "tags": [
+        "corpus",
+        "evaluation",
+        "migration"
+      ],
+      "timestamp": "2026-06-20 16:44:00+00:00",
+      "title": "Migration Corpus Evaluation",
+      "type": "schemas/concept.md"
+    },
+    "docs/security/THREAT_MODEL.md": {
+      "description": "Security model for parsing, validating, migrating, and resolving Cairn concept bundles.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Applies the URI resolution security RFC to implementation behavior.",
+          "target": "../../RFC/0005-uri-security-model.md",
+          "type": "implements"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "security",
+        "threat-model",
+        "cairn"
+      ],
+      "timestamp": "2026-06-20 16:43:00+00:00",
+      "title": "Cairn Threat Model",
       "type": "schemas/concept.md"
     },
     "examples/database.md": {

@@ -1,16 +1,21 @@
 from pathlib import Path
 import json
+import random
+import shutil
 import subprocess
 import sys
 import tempfile
 import unittest
 
+from tools.auditor.audit import audit
 from tools.index.index import main as write_index
+from tools.merge.merge import body_hash, canonical_body, merge_docs
 from tools.validate.validate import validate
 
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "tests" / "fixtures"
+VECTORS = ROOT / "test-vectors"
 
 
 class CairnToolTests(unittest.TestCase):
@@ -65,6 +70,96 @@ class CairnToolTests(unittest.TestCase):
             self.assertFalse(summary["source_modified"])
             self.assertTrue(Path(summary["report"]).exists())
             self.assertTrue((output / "cairn-proposed").exists())
+
+    def test_hash_vectors_match_python_and_javascript(self):
+        vectors = json.loads((VECTORS / "hash-vectors.json").read_text(encoding="utf-8"))
+        node = shutil.which("node")
+        for vector in vectors:
+            self.assertEqual(canonical_body(vector["document"]), vector["canonical_body"])
+            self.assertEqual(body_hash(vector["canonical_body"]), vector["sha256"])
+            if node:
+                with tempfile.NamedTemporaryFile("w", suffix=".md", delete=False) as fh:
+                    fh.write(vector["document"])
+                    path = fh.name
+                try:
+                    completed = subprocess.run(
+                        [node, str(ROOT / "js" / "cairn.js"), "hash", path],
+                        text=True,
+                        capture_output=True,
+                        check=True,
+                    )
+                    self.assertEqual(completed.stdout.strip(), vector["sha256"])
+                finally:
+                    Path(path).unlink(missing_ok=True)
+
+    def test_merge_vectors(self):
+        vectors = json.loads((VECTORS / "merge-vectors.json").read_text(encoding="utf-8"))
+        for vector in vectors:
+            meta, body, conflicts = merge_docs(vector["base"], vector["ours"], vector["theirs"])
+            self.assertEqual(meta["description"], vector["expected_description"])
+            self.assertEqual(meta["tags"], vector["expected_tags"])
+            self.assertEqual(conflicts, vector["expected_conflicts"])
+            self.assertEqual(meta["hash"], body_hash(body))
+
+    def test_merge_is_deterministic_for_generated_inputs(self):
+        rng = random.Random(20260620)
+        statuses = ["draft", "active", "deprecated"]
+        for idx in range(100):
+            base = f"""---
+type: schemas/concept.md
+title: Concept {idx}
+description: Base
+status: draft
+tags: [base]
+timestamp: 2026-06-20T00:00:00Z
+---
+# Concept {idx}
+"""
+            ours_tag = rng.choice(["api", "worker", "data"])
+            theirs_tag = rng.choice(["api", "service", "docs"])
+            ours = base.replace("description: Base", f"description: Ours {idx}").replace("tags: [base]", f"tags: [base, {ours_tag}]").replace("status: draft", f"status: {rng.choice(statuses)}").replace("00:00:00Z", "01:00:00Z")
+            theirs = base.replace("description: Base", f"description: Theirs {idx}").replace("tags: [base]", f"tags: [base, {theirs_tag}]").replace("status: draft", f"status: {rng.choice(statuses)}").replace("00:00:00Z", "02:00:00Z")
+            first = merge_docs(base, ours, theirs)
+            second = merge_docs(base, ours, theirs)
+            self.assertEqual(first, second)
+            self.assertEqual(first[2], [])
+
+    def test_compliance_vectors(self):
+        vectors = json.loads((VECTORS / "compliance-vectors.json").read_text(encoding="utf-8"))
+        for vector in vectors:
+            bundle = ROOT / vector["bundle"]
+            result = next(item for item in validate(bundle) if item["path"] == vector["path"])
+            self.assertEqual(result["valid"], vector["valid"])
+            if "expected_error" in vector:
+                self.assertIn(vector["expected_error"], result["errors"])
+            if vector.get("valid"):
+                audit_result = next(item for item in audit(bundle) if item["path"] == vector["path"])
+                self.assertGreaterEqual(audit_result["level"], vector["minimum_level"])
+
+    def test_corpus_cli_runs_sample_project(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            config = root / "corpus.json"
+            report = root / "report.json"
+            config.write_text(json.dumps({
+                "projects": [
+                    {"label": "sample", "path": str(FIXTURES / "sample-project")}
+                ]
+            }))
+            cmd = [
+                sys.executable,
+                str(ROOT / "cairn_cli.py"),
+                "corpus",
+                str(config),
+                "--output",
+                str(root / "runs"),
+                "--report",
+                str(report),
+            ]
+            completed = subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, check=True)
+            payload = json.loads(completed.stdout)
+            self.assertEqual(payload["projects"][0]["label"], "sample")
+            self.assertTrue(report.exists())
 
 
 if __name__ == "__main__":

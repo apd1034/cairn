@@ -1,0 +1,14 @@
+[
+  {
+    "name": "frontmatter excluded body hash",
+    "document": "---\ntype: schemas/concept.md\ntitle: Hash Vector\n---\n# Hash Vector\n\nBody line.\n",
+    "canonical_body": "# Hash Vector\n\nBody line.\n",
+    "sha256": "6c2275d6299829893e09d64c5c0c0f57e857dce3aa45d119ba51be248873d6ba"
+  },
+  {
+    "name": "crlf canonicalized",
+    "document": "---\r\ntype: schemas/concept.md\r\ntitle: CRLF Vector\r\n---\r\n# CRLF Vector\r\n\r\nBody line.\r\n",
+    "canonical_body": "# CRLF Vector\n\nBody line.\n",
+    "sha256": "467d2b914ccf2da9943b8096083fb4ad88fb6556ea909bc0c93e8788c9db7cef"
+  }
+]

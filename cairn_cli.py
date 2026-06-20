@@ -5,7 +5,9 @@ import json
 import sys
 
 from tools.auditor.audit import audit, write_report as write_audit_report
+from tools.corpus.evaluate import main as corpus_main
 from tools.index.index import main as write_index
+from tools.merge.merge import main as merge_main
 from tools.project_agent.cairnize import run as run_migration
 from tools.reference_parser.parser import parse as parse_concept
 from tools.validate.validate import validate
@@ -46,6 +48,23 @@ def cmd_parse(args):
     return 0
 
 
+def cmd_merge(args):
+    merge_args = [args.base, args.ours, args.theirs]
+    if args.output:
+        merge_args.extend(["--output", args.output])
+    if args.conflicts_json:
+        merge_args.extend(["--conflicts-json", args.conflicts_json])
+    return merge_main(merge_args)
+
+
+def cmd_corpus(args):
+    corpus_args = [args.config, "--output", args.output]
+    if args.report:
+        corpus_args.extend(["--report", args.report])
+    corpus_main(corpus_args)
+    return 0
+
+
 def build_parser():
     parser = argparse.ArgumentParser(prog="cairn", description="Validate, index, audit, and migrate Cairn bundles.")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -72,6 +91,20 @@ def build_parser():
     parse_cmd = sub.add_parser("parse", help="Parse one or more Cairn concept files.")
     parse_cmd.add_argument("files", nargs="+")
     parse_cmd.set_defaults(func=cmd_parse)
+
+    merge_cmd = sub.add_parser("merge", help="Deterministically merge three Cairn concept versions.")
+    merge_cmd.add_argument("base")
+    merge_cmd.add_argument("ours")
+    merge_cmd.add_argument("theirs")
+    merge_cmd.add_argument("--output")
+    merge_cmd.add_argument("--conflicts-json")
+    merge_cmd.set_defaults(func=cmd_merge)
+
+    corpus_cmd = sub.add_parser("corpus", help="Run migration scanner over a corpus config.")
+    corpus_cmd.add_argument("config", help="JSON config with projects[].path")
+    corpus_cmd.add_argument("--output", default="corpus-runs")
+    corpus_cmd.add_argument("--report")
+    corpus_cmd.set_defaults(func=cmd_corpus)
 
     return parser
 
