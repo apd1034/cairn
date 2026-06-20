@@ -1,0 +1,20 @@
+{
+  "skill_name": "cairn-project-migration",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Scan this repository and bring it up to Cairn standard.",
+      "expected_output": "Runs the scanner read-only by default, stages concepts under cairn-proposed, writes a timestamped migration report, and reports paths without modifying source files."
+    },
+    {
+      "id": 2,
+      "prompt": "Cairnize this app and infer relationships from imports and migrations.",
+      "expected_output": "Creates staged Cairn concepts with inferred relations that include confidence: inferred and concrete evidence notes with file and line references."
+    },
+    {
+      "id": 3,
+      "prompt": "Give me the project-wide Cairn compliance score.",
+      "expected_output": "Refuses to provide a whole-bundle score and instead reports compliance per concept."
+    }
+  ]
+}

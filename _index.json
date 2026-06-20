@@ -1,0 +1,682 @@
+{
+  "backlinks": {
+    "../../SPECIFICATION.md": [
+      {
+        "confidence": "declared",
+        "source": "tools/validate/README.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "tools/reference-parser/README.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "tools/index/README.md",
+        "type": "references"
+      }
+    ],
+    "../../migration-guides/project-analysis.md": [
+      {
+        "confidence": "declared",
+        "source": "tools/project-agent/AGENT.md",
+        "type": "implements"
+      },
+      {
+        "confidence": "declared",
+        "source": "tools/project-agent/README.md",
+        "type": "references"
+      }
+    ],
+    "../../schemas/audit-rubric.md": [
+      {
+        "confidence": "declared",
+        "source": "tools/project-agent/README.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "tools/auditor/README.md",
+        "type": "references"
+      }
+    ],
+    "../../tools/project-agent/README.md": [
+      {
+        "confidence": "declared",
+        "source": "tools/project-agent/AGENT.md",
+        "type": "references"
+      }
+    ],
+    "../RFC/0002-agent-skills-companion.md": [
+      {
+        "confidence": "declared",
+        "source": "schemas/agent-skill.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "skills/cairn-project-migration.md",
+        "type": "implements"
+      }
+    ],
+    "../SPECIFICATION.md": [
+      {
+        "confidence": "declared",
+        "source": "migration-guides/project-analysis.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "assets/knowledge-formats-okf-vs-cairn.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "assets/cairn-logical-evolution-of-okf.md",
+        "type": "references"
+      }
+    ],
+    "../schemas/agent-skill.md": [
+      {
+        "confidence": "declared",
+        "source": "skills/README.md",
+        "type": "references"
+      }
+    ],
+    "../tools/project-agent/AGENT.md": [
+      {
+        "confidence": "declared",
+        "source": "skills/cairn-project-migration.md",
+        "type": "references"
+      }
+    ],
+    "RFC/0001-cairn-core.md": [
+      {
+        "confidence": "declared",
+        "source": "SPECIFICATION.md",
+        "type": "implements"
+      }
+    ],
+    "SPECIFICATION.md": [
+      {
+        "confidence": "declared",
+        "source": "schemas/audit-rubric.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "RFC/0002-agent-skills-companion.md",
+        "type": "references"
+      }
+    ],
+    "examples/database.md": [
+      {
+        "confidence": "declared",
+        "source": "examples/service.md",
+        "type": "depends_on"
+      }
+    ],
+    "examples/service.md": [
+      {
+        "confidence": "inferred",
+        "source": "examples/inferred-relation.md",
+        "type": "references"
+      }
+    ],
+    "schemas/audit-rubric.md": [
+      {
+        "confidence": "declared",
+        "source": "schemas/audit-report.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "reports/CAIRN_AUDIT_20260620T143738Z.md",
+        "type": "references"
+      }
+    ],
+    "schemas/concept.md": [
+      {
+        "confidence": "declared",
+        "source": "schemas/schema.md",
+        "type": "implements"
+      },
+      {
+        "confidence": "declared",
+        "source": "examples/database.md",
+        "type": "references"
+      },
+      {
+        "confidence": "declared",
+        "source": "skills/cairn-project-migration/assets/schemas/schema.md",
+        "type": "implements"
+      }
+    ]
+  },
+  "concepts": {
+    "RFC/0001-cairn-core.md": {
+      "description": "Establishes the initial Cairn core format and repository layout.",
+      "status": "active",
+      "tags": [
+        "rfc",
+        "core"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Cairn Core v1.0",
+      "type": "schemas/rfc.md"
+    },
+    "RFC/0002-agent-skills-companion.md": {
+      "description": "Defines how Cairn repositories may package Agent Skills-compatible instructions without expanding Cairn core.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Keeps agent workflows outside Cairn core as a companion layer.",
+          "target": "SPECIFICATION.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "rfc",
+        "agent-skills",
+        "companion"
+      ],
+      "timestamp": "2026-06-20 10:00:00-05:00",
+      "title": "Agent Skills Companion Layer",
+      "type": "schemas/rfc.md"
+    },
+    "SPECIFICATION.md": {
+      "description": "Defines the core Cairn format for portable, file-based knowledge concepts.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Establishes the initial Cairn core specification.",
+          "target": "RFC/0001-cairn-core.md",
+          "type": "implements"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "cairn",
+        "specification",
+        "core"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Cairn v1.0 Specification",
+      "type": "schemas/specification.md"
+    },
+    "assets/cairn-logical-evolution-of-okf.md": {
+      "description": "Infographic comparing Cairn to OKF and summarizing Cairn's structural additions.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Visual summary of the specification's comparison against prior file-based formats.",
+          "target": "../SPECIFICATION.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "asset",
+        "infographic",
+        "cairn",
+        "okf"
+      ],
+      "timestamp": "2026-06-20 09:39:00-05:00",
+      "title": "Cairn Logical Evolution of OKF Infographic",
+      "type": "schemas/concept.md"
+    },
+    "assets/knowledge-formats-okf-vs-cairn.md": {
+      "description": "Infographic showing OKF foundational principles and Cairn's production hardening additions.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Visual summary of Cairn's move from file-based principles to production-grade trust and scaling.",
+          "target": "../SPECIFICATION.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "asset",
+        "infographic",
+        "cairn",
+        "okf"
+      ],
+      "timestamp": "2026-06-20 09:40:00-05:00",
+      "title": "Knowledge Formats OKF vs Cairn Infographic",
+      "type": "schemas/concept.md"
+    },
+    "examples/database.md": {
+      "description": "Example data concept referenced by the payment service.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Uses the base concept schema for demonstration.",
+          "target": "schemas/concept.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "example",
+        "data"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Payment Database",
+      "type": "schemas/concept.md"
+    },
+    "examples/inferred-relation.md": {
+      "description": "Demonstrates how a tool-generated relation records its evidence.",
+      "relations": [
+        {
+          "confidence": "inferred",
+          "note": "Inferred from import PaymentService in src/example.ts:12.",
+          "target": "examples/service.md",
+          "type": "references"
+        }
+      ],
+      "status": "draft",
+      "tags": [
+        "example",
+        "inferred"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Inferred Relation Example",
+      "type": "schemas/concept.md"
+    },
+    "examples/service.md": {
+      "aliases": [
+        "examples/billing-service.md"
+      ],
+      "description": "Example service concept showing a declared dependency relation.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Maintainer-declared dependency for payment persistence.",
+          "target": "examples/database.md",
+          "type": "depends_on"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "example",
+        "service"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Payment Service",
+      "type": "schemas/concept.md"
+    },
+    "migration-guides/project-analysis.md": {
+      "description": "Describes the read-only workflow for bringing an existing project toward Cairn.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "../SPECIFICATION.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "migration",
+        "analysis"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Project Analysis Migration Guide",
+      "type": "schemas/concept.md"
+    },
+    "reports/CAIRN_AUDIT_20260620T143738Z.md": {
+      "description": "Timestamped per-concept Cairn compliance audit.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "schemas/audit-rubric.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "audit",
+        "report"
+      ],
+      "timestamp": "2026-06-20 14:37:38.981864+00:00",
+      "title": "Cairn Audit 20260620T143738Z",
+      "type": "schemas/audit-report.md"
+    },
+    "schemas/agent-skill.md": {
+      "description": "A schema for Cairn concepts that document Agent Skills-compatible skill packages.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Companion layer for agent instructions without adding agent runtime fields to Cairn core.",
+          "target": "../RFC/0002-agent-skills-companion.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "schema",
+        "agent-skills",
+        "companion"
+      ],
+      "timestamp": "2026-06-20 10:00:00-05:00",
+      "title": "Agent Skill",
+      "type": "schemas/schema.md"
+    },
+    "schemas/audit-report.md": {
+      "description": "A schema for timestamped per-concept Cairn audit findings.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "schemas/audit-rubric.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "schema",
+        "audit",
+        "report"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Audit Report",
+      "type": "schemas/schema.md"
+    },
+    "schemas/audit-rubric.md": {
+      "description": "The published methodology for assigning per-concept Cairn compliance levels.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Compliance levels are defined by the core specification.",
+          "target": "SPECIFICATION.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "schema",
+        "audit",
+        "rubric"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Audit Rubric",
+      "type": "schemas/schema.md"
+    },
+    "schemas/concept.md": {
+      "description": "The base schema contract for a Cairn concept file.",
+      "status": "active",
+      "tags": [
+        "schema",
+        "core"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Concept",
+      "type": "schemas/schema.md"
+    },
+    "schemas/migration-report.md": {
+      "description": "A schema for reports produced when analyzing an existing project for Cairn adoption.",
+      "status": "active",
+      "tags": [
+        "schema",
+        "migration",
+        "report"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Migration Report",
+      "type": "schemas/schema.md"
+    },
+    "schemas/rfc.md": {
+      "description": "A schema for proposed or accepted changes to Cairn.",
+      "status": "active",
+      "tags": [
+        "schema",
+        "governance"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "RFC",
+      "type": "schemas/schema.md"
+    },
+    "schemas/schema.md": {
+      "description": "A Cairn concept that documents field contracts for another concept type.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "schemas/concept.md",
+          "type": "implements"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "schema",
+        "core"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Schema",
+      "type": "schemas/concept.md"
+    },
+    "schemas/specification.md": {
+      "description": "A schema for published Cairn specification documents.",
+      "status": "active",
+      "tags": [
+        "schema",
+        "specification"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Specification",
+      "type": "schemas/schema.md"
+    },
+    "skills/README.md": {
+      "description": "Contains Agent Skills-compatible packages for agents that work with Cairn.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Documents how Agent Skills packages are represented alongside Cairn concepts.",
+          "target": "../schemas/agent-skill.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "agent-skills",
+        "skills",
+        "agents"
+      ],
+      "timestamp": "2026-06-20 10:00:00-05:00",
+      "title": "Agent Skills Directory",
+      "type": "schemas/concept.md"
+    },
+    "skills/cairn-project-migration.md": {
+      "description": "Agent Skills-compatible package for scanning projects and staging Cairn migration artifacts.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Packages Cairn migration behavior as an Agent Skill companion.",
+          "target": "../RFC/0002-agent-skills-companion.md",
+          "type": "implements"
+        },
+        {
+          "confidence": "declared",
+          "note": "Mirrors the Cairn migration agent operating contract.",
+          "target": "../tools/project-agent/AGENT.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "agent-skills",
+        "migration",
+        "cairn"
+      ],
+      "timestamp": "2026-06-20 10:00:00-05:00",
+      "title": "Cairn Project Migration Skill",
+      "type": "schemas/agent-skill.md"
+    },
+    "skills/cairn-project-migration/assets/schemas/concept.md": {
+      "description": "The base schema contract for a Cairn concept file.",
+      "status": "active",
+      "tags": [
+        "schema",
+        "core"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Concept",
+      "type": "schemas/schema.md"
+    },
+    "skills/cairn-project-migration/assets/schemas/migration-report.md": {
+      "description": "A schema for reports produced when analyzing an existing project for Cairn adoption.",
+      "status": "active",
+      "tags": [
+        "schema",
+        "migration",
+        "report"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Migration Report",
+      "type": "schemas/schema.md"
+    },
+    "skills/cairn-project-migration/assets/schemas/schema.md": {
+      "description": "A Cairn concept that documents field contracts for another concept type.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "schemas/concept.md",
+          "type": "implements"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "schema",
+        "core"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Schema",
+      "type": "schemas/concept.md"
+    },
+    "tools/auditor/README.md": {
+      "description": "Reports Cairn compliance levels per concept using the published audit rubric.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "../../schemas/audit-rubric.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "tools",
+        "audit"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Auditor",
+      "type": "schemas/concept.md"
+    },
+    "tools/index/README.md": {
+      "description": "Generates _index.json from Cairn frontmatter and computed backlinks.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "../../SPECIFICATION.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "tools",
+        "index"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Indexer",
+      "type": "schemas/concept.md"
+    },
+    "tools/project-agent/AGENT.md": {
+      "description": "Operating contract for an agent that scans projects and stages Cairn migration artifacts.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Defines the agent behavior required by the project analysis workflow.",
+          "target": "../../migration-guides/project-analysis.md",
+          "type": "implements"
+        },
+        {
+          "confidence": "declared",
+          "note": "Companion documentation for the runnable implementation.",
+          "target": "../../tools/project-agent/README.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "agent",
+        "migration",
+        "cairn"
+      ],
+      "timestamp": "2026-06-20 09:46:00-05:00",
+      "title": "Cairn Migration Agent Contract",
+      "type": "schemas/concept.md"
+    },
+    "tools/project-agent/README.md": {
+      "description": "A read-only migration agent that scans a project and stages Cairn concepts plus a migration report.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "note": "Implements the read-only project analysis workflow.",
+          "target": "../../migration-guides/project-analysis.md",
+          "type": "references"
+        },
+        {
+          "confidence": "declared",
+          "note": "Uses the published per-concept compliance model.",
+          "target": "../../schemas/audit-rubric.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "tools",
+        "migration",
+        "agent"
+      ],
+      "timestamp": "2026-06-20 09:45:00-05:00",
+      "title": "Cairn Project Agent",
+      "type": "schemas/concept.md"
+    },
+    "tools/reference-parser/README.md": {
+      "description": "Proof artifacts showing Cairn core parsing in under 60 lines per language.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "../../SPECIFICATION.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "tools",
+        "parser",
+        "minimalism"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Reference Parser",
+      "type": "schemas/concept.md"
+    },
+    "tools/validate/README.md": {
+      "description": "Per-concept validation for Cairn schemas, relation resolution, aliases, and optional hashes.",
+      "relations": [
+        {
+          "confidence": "declared",
+          "target": "../../SPECIFICATION.md",
+          "type": "references"
+        }
+      ],
+      "status": "active",
+      "tags": [
+        "tools",
+        "validation"
+      ],
+      "timestamp": "2026-06-20 00:00:00-05:00",
+      "title": "Validator",
+      "type": "schemas/concept.md"
+    }
+  }
+}

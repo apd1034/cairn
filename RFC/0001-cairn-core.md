@@ -1,0 +1,12 @@
+---
+type: schemas/rfc.md
+title: Cairn Core v1.0
+description: Establishes the initial Cairn core format and repository layout.
+status: active
+tags: [rfc, core]
+timestamp: 2026-06-20T00:00:00-05:00
+---
+
+# RFC 0001: Cairn Core v1.0
+
+This RFC accepts the initial Cairn core: one concept per markdown file, path identity, YAML frontmatter, typed relations with provenance, aliases, optional body hashes, deterministic merge rules, per-concept compliance, and proof-of-minimalism reference parsers.
